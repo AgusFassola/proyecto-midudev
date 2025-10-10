@@ -7,13 +7,44 @@
 body{
         
     font-family: system-ui;
-    background-color:  var(--background);
+    background-color:  var(--backgound);
     color: var(--text-primary);
     min-height: 100vh;/*total de la altura de la pantalla*/
     display: flex;
     flex-direction: column;
     line-height: 1.6;
 }
+
+#buscador {
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #222b79;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #242434;
+    color: white;
+    
+}
+.btnBuscar{
+    background-color: #242434;
+    color: #cfcfcf;
+    border: 1px solid #555;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    &:hover {
+    background-color: #42425f;
+    }
+    &:focus {
+    outline: none;
+    border-color: #777;
+    }
+}
+
 
 
 main > section:nth-child(2) footer{
@@ -28,6 +59,24 @@ main > section:nth-child(2) footer{
     }
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+a {
+    color: #cfcfcf;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.titulo{
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 article{
     background-color: var(--card-bg);

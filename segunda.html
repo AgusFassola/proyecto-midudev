@@ -26,16 +26,25 @@
             <h1>Encuentra tu próximo trabajo</h1>
             <p>hacer el segundo diseño en casa.</p>
         </section>
+        <section class="caja-buscador">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                    <path d="M21 21l-6 -6" />
+                </svg>
         <input id="buscador" type="search" placeholder="Buscar empleos">
-        <section>
+        </section>
+        <section class="selects">
             <select name="" id="">
-                <option value="">Categoria</option>
+                <option value="">Tecnología</option>
                 <option value="">Categoria 1</option>
                 <option value="">Categoria 2</option>
                 <option value="">Categoria 3</option>
             </select>
             <select name="" id="">
-                <option value="">Categoria</option>
+                <option value="">Ubicación</option>
                 <option value="">Categoria 1</option>
                 <option value="">Categoria 2</option>
                 <option value="">Categoria 3</option>
@@ -53,6 +62,52 @@
                 <option value="">Categoria 3</option>
             </select>
         </section>
-
+        <h2>Resultado de la búsqueda</h2>
+        <section  class="resultados">
+            <div class="cajita">
+                <article class="articles" >
+                    <h3>Desarrollador Frontend</h3>
+                    <p>Empresa XYZ - Remoto</p>
+                    <small></small>
+                </article>
+                <button>Aplicar</button>
+            </div>
+            <div class="cajita">
+                <article class="articles" >
+                    <h3>Desarrollador Frontend</h3>
+                    <p>Empresa XYZ - Remoto</p>
+                </article>
+                <button>Aplicar</button>
+            </div>
+            <div class="cajita">
+                <article class="articles" >
+                    <h3>Desarrollador Frontend</h3>
+                    <p>Empresa XYZ - Remoto</p>
+                </article>
+                <button>Aplicar</button>
+            </div>
+            <div class="cajita">
+                <article class="articles" >
+                    <h3>Desarrollador Frontend</h3>
+                    <p>Empresa XYZ - Remoto</p>
+                </article>
+                <button>Aplicar</button>
+            </div>
+        </section>
+        <section>
+            <nav class="paginacion" aria-label="Paginación de resultados de búsqueda">
+            <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg></a>
+            <a class="is-active" href="">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="">4</a>
+            <a href="">5</a>
+            <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg></a>
+        </nav>
+        </section>
+    </main>
+    <footer>
+            <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
+    </footer>
 </body>
 </html>

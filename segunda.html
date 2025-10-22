@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,21 @@
     <link rel="stylesheet" href="./segundo.css">
     <script type="module" src="./segunda.js"></script>
 </head>
+
 <body>
     <header>
-      <h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrows-move-horizontal"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 9l3 3l-3 3" /><path d="M15 12h6" /><path d="M6 9l-3 3l3 3" /><path d="M3 12h6" /></svg>
-            DevJobs</h2>
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-arrows-move-horizontal">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M18 9l3 3l-3 3" />
+                <path d="M15 12h6" />
+                <path d="M6 9l-3 3l3 3" />
+                <path d="M3 12h6" />
+            </svg>
+            DevJobs
+        </h2>
         <nav>
             <a href="./index.html">Inicio</a>
             <a href="">Empleos</a>
@@ -26,50 +37,53 @@
             <h1>Encuentra tu próximo trabajo</h1>
             <p>hacer el segundo diseño en casa.</p>
         </section>
-        <section class="caja-buscador">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        <form id="empleos-form" role="search">
+            <section class="caja-buscador">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="icon icon-tabler icons-tabler-outline icon-tabler-search">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                 </svg>
-        <input id="buscador" type="search" placeholder="Buscar empleos">
-        </section>
-        <section class="selects">
-            <select name="" id="">
-                <option value="">Tecnología</option>
-                <option value="">JavaScript</option>
-                <option value="">Python</option>
-                <option value="">React</option>
-                <option value="">Node js</option>
-                <option value="">Java</option>
-            </select>
-            <select name="" id="">
-                <option value="">Ubicación</option>
-                <option value="">Remoto</option>
-                <option value="">Presencial</option>
-                <option value="">Híbrido</option>
-            </select>
-            <select name="" id="">
-                <option value="">Nivel de experiencia</option>
-                <option value="">Junior</option>
-                <option value="">Semisenior</option>
-                <option value="">Senior</option>
-            </select>
-        </section>
-        <h2>Resultado de la búsqueda</h2>
-        <section  class="resultados">
-            <div class="cajita">
-                <article class="articles" >
+                <input id="buscador" type="search" placeholder="Buscar empleos">
+            </section>
+            <section class="selects">
+                <select name="technology" id="filter-technology">
+                    <option value="">Tecnología</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="React">React</option>
+                    <option value="Nodejs">Node js</option>
+                    <option value="Java">Java</option>
+                </select>
+                <select name="location" id="filter-location">
+                    <option value="">Ubicación</option>
+                    <option value="Remoto">Remoto</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Híbrido">Híbrido</option>
+                </select>
+                <select name="experience-level" id="filter-experience-level">
+                    <option value="">Nivel de experiencia</option>
+                    <option value="Junior">Junior</option>
+                    <option value="Semisenior">Semisenior</option>
+                    <option value="Senior">Senior</option>
+                </select>
+            </section>
+        </form>
+        <h2 class="h2-busqueda">Resultado de la búsqueda:</h2>
+        <p class="resultado"></p>
+        <section class="resultados">
+            <div data-modalidad="Remoto" class="cajita">
+                <article  class="articles">
                     <h3>Desarrollador Frontend React</h3>
                     <p>Empresa XYZ - Remoto</p>
                     <small>Nivel de Experiencia: Senior</small>
                 </article>
                 <button id="boton-importante">Aplicar</button>
             </div>
-            <div class="cajita">
-                <article class="articles" >
+            <div data-modalidad="Presencial" class="cajita">
+                <article  class="articles">
                     <h3>Desarrollador Frontend React</h3>
                     <p>Empresa XYZ - Presencial</p>
                     <small>Nivel de Experiencia: Junior</small>
@@ -77,16 +91,16 @@
                 </article>
                 <button>Aplicar</button>
             </div>
-            <div class="cajita">
-                <article class="articles" >
+            <div data-modalidad="Híbrido" class="cajita">
+                <article  class="articles">
                     <h3>Desarrollador Backend Java</h3>
                     <p>Empresa XYZ - Híbrido</p>
                     <small>Nivel de Experiencia: Semisenior</small>
                 </article>
                 <button>Aplicar</button>
             </div>
-            <div class="cajita">
-                <article class="articles" >
+            <div data-modalidad="Remoto" class="cajita">
+                <article  class="articles">
                     <h3>Desarrollador Backend Node js</h3>
                     <p>Empresa XYZ - Remoto</p>
                     <small>Nivel de Experiencia: Junior</small>
@@ -94,7 +108,7 @@
                 <button>Aplicar</button>
             </div>
             <div class="cajita">
-                <article class="articles" >
+                <article class="articles">
                     <h3>Desarrollador Backend Python</h3>
                     <p>Empresa XYZ - Híbrido</p>
                     <small>Nivel de Experiencia: Senior</small>
@@ -102,20 +116,33 @@
                 <button>Aplicar</button>
             </div>
         </section>
+
+
         <section>
             <nav class="paginacion" aria-label="Paginación de resultados de búsqueda">
-            <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg></a>
-            <a class="is-active" href="">1</a>
-            <a href="">2</a>
-            <a href="">3</a>
-            <a href="">4</a>
-            <a href="">5</a>
-            <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg></a>
-        </nav>
+                <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M15 6l-6 6l6 6" />
+                    </svg></a>
+                <a class="is-active" href="">1</a>
+                <a href="">2</a>
+                <a href="">3</a>
+                <a href="">4</a>
+                <a href="">5</a>
+                <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M9 6l6 6l-6 6" />
+                    </svg></a>
+            </nav>
         </section>
     </main>
     <footer>
-            <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
+        <small>&copy; 2025 DevJobs. Todos los derechos reservados.</small>
     </footer>
 </body>
+
 </html>

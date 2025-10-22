@@ -75,6 +75,10 @@ header {
     margin-bottom: 40px;
 }
 
+.h2-busqueda{
+    display: none;
+}
+
 h2{
     font-size: 1.5rem;
     line-height: 1.2;

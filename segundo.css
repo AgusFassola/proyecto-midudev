@@ -50,6 +50,12 @@ body{
     &:disabled {
     opacity: .5;
     pointer-events: none;
+
+    &.is-applied{
+        background-color: green;
+        color: white;
+        cursor: not-allowed;
+    }
   }
 }
 

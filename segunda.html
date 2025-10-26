@@ -28,7 +28,17 @@
             <a href="">Empleos</a>
         </nav>
         <div>
-            <a href="">Publicar un empleo</a>
+            <devjobs-avatar
+                service="github" 
+                username="AgusFassola"
+                size="32"
+            ></devjobs-avatar>
+            <devjobs-avatar
+                service="github" 
+                username="midudev"
+                size="32"
+            ></devjobs-avatar>
+
             <a href="">Iniciar sesión</a>
         </div>
     </header>
@@ -51,12 +61,18 @@
             <section class="selects">
                 <select name="technology" id="filter-technology">
                     <option value="">Tecnología</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="Python">Python</option>
-                    <option value="React">React</option>
-                    <option value="Nodejs">Node js</option>
-                    <option value="Java">Java</option>
-                </select>
+                    <hr />
+                    <optgroup label="Frontend">
+                        <option value="React">React</option>
+                        <option value="JavaScript">JavaScript</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="Backend">
+                        <option value="Python">Python</option>
+                        <option value="Nodejs">Node js</option>
+                        <option value="Java">Java</option>
+                    </optgroup> 
+                    </select>
                 <select name="location" id="filter-location">
                     <option value="">Ubicación</option>
                     <option value="Remoto">Remoto</option>
@@ -74,47 +90,7 @@
         <h2 class="h2-busqueda">Resultado de la búsqueda:</h2>
         <p class="resultado"></p>
         <section class="resultados">
-            <div data-modalidad="Remoto" class="cajita">
-                <article  class="articles">
-                    <h3>Desarrollador Frontend React</h3>
-                    <p>Empresa XYZ - Remoto</p>
-                    <small>Nivel de Experiencia: Senior</small>
-                </article>
-                <button id="boton-importante">Aplicar</button>
-            </div>
-            <div data-modalidad="Presencial" class="cajita">
-                <article  class="articles">
-                    <h3>Desarrollador Frontend React</h3>
-                    <p>Empresa XYZ - Presencial</p>
-                    <small>Nivel de Experiencia: Junior</small>
-
-                </article>
-                <button>Aplicar</button>
-            </div>
-            <div data-modalidad="Híbrido" class="cajita">
-                <article  class="articles">
-                    <h3>Desarrollador Backend Java</h3>
-                    <p>Empresa XYZ - Híbrido</p>
-                    <small>Nivel de Experiencia: Semisenior</small>
-                </article>
-                <button>Aplicar</button>
-            </div>
-            <div data-modalidad="Remoto" class="cajita">
-                <article  class="articles">
-                    <h3>Desarrollador Backend Node js</h3>
-                    <p>Empresa XYZ - Remoto</p>
-                    <small>Nivel de Experiencia: Junior</small>
-                </article>
-                <button>Aplicar</button>
-            </div>
-            <div class="cajita">
-                <article class="articles">
-                    <h3>Desarrollador Backend Python</h3>
-                    <p>Empresa XYZ - Híbrido</p>
-                    <small>Nivel de Experiencia: Senior</small>
-                </article>
-                <button>Aplicar</button>
-            </div>
+           
         </section>
 
 

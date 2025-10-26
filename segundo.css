@@ -28,6 +28,9 @@ body{
     align-items: center;
     border: 0.1px solid;
     border-color: var(--text-muted);
+    &.is-hiden{
+        display: none;
+    }
 }
 .cajita button{
     background-color: var(--primary-light);

@@ -18,6 +18,15 @@
     <script type="text/babel">
         //componente de React
         function JobCard({data, titulo, empresa, descripcion}){
+            
+            const [isApplied, setIsApplied] = React.useState(false);
+
+            function handleClick(){
+                setIsApplied(!isApplied);
+            }
+
+            const text = isApplied ? 'Aplicado' : 'Aplicar'
+            const buttonClass = isApplied ? 'is-applied' : ''
             return (
                 <div className="cajita">
                     <article className="articles"
@@ -30,7 +39,11 @@
                     <p>Nivel de experiencia: {data.nivel}</p> 
                     <small>{descripcion}</small> 
                     </article>
-                    <button id="boton-importante">Aplicar</button>
+                    <button 
+                        onClick={handleClick}
+                        className={`boton-importante ${buttonClass}`}
+                        disabled={isApplied}
+                    >{text}</button>
                 </div>
             )
         }

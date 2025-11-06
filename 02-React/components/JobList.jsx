@@ -1,22 +1,7 @@
-import JobCard from "../components/JobCard"
-import { Header } from "../components/Header"
-import { Footer } from "../components/Footer"
-import { SearchFormSection } from "../components/SearchFormSection"
-import { Pagination } from "../components/Pagination"
-import { Title } from "../components/Title"
+import JobCard from "./JobCard";
 
-function App() {
-
-  return (
-    <>
-      <Header />
-      <main>
-        <Title/>
-        <SearchFormSection/>
-
-        <h2 className="h2-busqueda">Resultado de la búsqueda:</h2>
-        <p className="resultado"></p>
-        <section className="resultados">
+export function JobList(){
+  <>
           <JobCard
             titulo="Desarrollador Frontend React"
             empresa="Tech Solutions"
@@ -35,14 +20,5 @@ function App() {
             descripcion="Estamos contratando un desarrollador backend con experiencia en Node.js para construir y mantener nuestras APIs."
             data={{ modalidad: "Presencial", nivel: "Mid-level", technology: "Node.js" }}
           />
-        </section>
-
-        <Pagination currenPage={1} totalPages={6} />
-        
-      </main>
-      <Footer />
     </>
-  )
 }
-
-export default App

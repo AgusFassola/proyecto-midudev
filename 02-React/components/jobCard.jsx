@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 
-function JobCard({data, titulo, empresa, descripcion}){
+function JobCard({job}){
             
             const [isApplied, setIsApplied] = useState(false);
 
@@ -11,17 +11,18 @@ function JobCard({data, titulo, empresa, descripcion}){
 
             const text = isApplied ? 'Aplicado' : 'Aplicar'
             const buttonClass = isApplied ? 'is-applied' : ''
+
             return (
                 <div className="cajita">
                     <article className="articles"
-                        data-modalidad={data.modalidad}
-                        data-nivel={data.nivel}
-                        data-technology={data.technology}
+                        data-modalidad={job.data.modalidad}
+                        data-nivel={job.data.nivel}
+                        data-technology={job.data.technology}
                     >
-                    <h3>{titulo}</h3>
-                    <h4>{empresa} - {data.modalidad}</h4>
-                    <p>Nivel de experiencia: {data.nivel}</p> 
-                    <small>{descripcion}</small> 
+                    <h3>{job.titulo}</h3>
+                    <h4>{job.empresa} - {job.data.modalidad}</h4>
+                    <p>Nivel de experiencia: {job.data.nivel}</p> 
+                    <small>{job.descripcion}</small> 
                     </article>
                     <button 
                         onClick={handleClick}

@@ -1,11 +1,30 @@
+import { useState } from "react"
+
 import JobCard from "../components/JobCard"
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
 import { SearchFormSection } from "../components/SearchFormSection"
 import { Pagination } from "../components/Pagination"
 import { Title } from "../components/Title"
+import { JobList } from "../components/JobList"
+
+import jobsData from "../../data.json"
+
+const RESULTS_PER_PAGE=5;
 
 function App() {
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages=Math.ceil(jobsData.length / RESULTS_PER_PAGE);
+
+  const pagedResults = jobsData.slice(
+    (currentPage -1) * RESULTS_PER_PAGE,
+    currentPage * RESULTS_PER_PAGE
+  );
+
+  const handlePageChange=(page) =>{
+    setCurrentPage(page);
+  }
 
   return (
     <>
@@ -13,31 +32,8 @@ function App() {
       <main>
         <Title/>
         <SearchFormSection/>
-
-        <h2 className="h2-busqueda">Resultado de la búsqueda:</h2>
-        <p className="resultado"></p>
-        <section className="resultados">
-          <JobCard
-            titulo="Desarrollador Frontend React"
-            empresa="Tech Solutions"
-            descripcion="Únete a nuestro equipo de desarrollo frontend utilizando React para crear interfaces de usuario innovadoras."
-            data={{ modalidad: "Remoto", nivel: "Junior", technology: "React" }}
-          />
-          <JobCard
-            titulo="Ingeniero de Software Full Stack"
-            empresa="Innovatech"
-            descripcion="Buscamos un ingeniero de software con experiencia en desarrollo full stack para trabajar en proyectos emocionantes."
-            data={{ modalidad: "Híbrido", nivel: "Senior", technology: "Node.js" }}
-          />
-          <JobCard
-            titulo="Desarrollador Backend Node.js"
-            empresa="DataCorp"
-            descripcion="Estamos contratando un desarrollador backend con experiencia en Node.js para construir y mantener nuestras APIs."
-            data={{ modalidad: "Presencial", nivel: "Mid-level", technology: "Node.js" }}
-          />
-        </section>
-
-        <Pagination currenPage={1} totalPages={6} />
+        <JobList jobsData={pagedResults}/>
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
         
       </main>
       <Footer />

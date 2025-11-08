@@ -1,8 +1,31 @@
-export function SearchFormSection(){
+import { useId } from "react";
+
+export function SearchFormSection({ onSearch, onTextFilter }){
+
+const idText=useId();
+const idTechnology=useId();
+const idLocation=useId();
+const idExperienceLevel=useId();
+
 const handleSubmit=(event)=>{
   event.preventDefault();
-  console.log('Formulario enviado');
+
+  const formData = new FormData(event.target);
+
+  const filters={
+    search: formData.get(idText),
+    technology: formData.get(idTechnology),
+    location: formData.get(idLocation),
+    experienceLevel: formData.get(idExperienceLevel),
+  };
+ console.log(filters);
+  onSearch(filters);
 }
+
+ const handleTextChange =(event) =>{
+  const text = event.target.value;
+  onTextFilter(text);
+ }
 
   return(
     <form onSubmit={handleSubmit} id="empleos-form" role="search">
@@ -14,11 +37,12 @@ const handleSubmit=(event)=>{
               <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
               <path d="M21 21l-6 -6" />
             </svg>
-            <input id="buscador" type="search" placeholder="Buscar empleos" />
-            <button type="submit" style={{  right:0 }}>Buscar</button>
+            <input name={idText} id="buscador" type="search" placeholder="Buscar empleos" 
+            onChange={handleTextChange} />
+            <button type="submit" >Buscar</button>
           </section>
           <section className="selects">
-            <select name="technology" id="filter-technology">
+            <select name={idTechnology} id="filter-technology">
               <option value="">Tecnología</option>
               <hr />
               <optgroup label="Frontend">
@@ -32,13 +56,13 @@ const handleSubmit=(event)=>{
                 <option value="Java">Java</option>
               </optgroup>
             </select>
-            <select name="location" id="filter-location">
+            <select name={idLocation} id="filter-location">
               <option value="">Ubicación</option>
               <option value="Remoto">Remoto</option>
               <option value="Presencial">Presencial</option>
               <option value="Híbrido">Híbrido</option>
             </select>
-            <select name="experience-level" id="filter-experience-level">
+            <select name={idExperienceLevel} id="filter-experience-level">
               <option value="">Nivel de experiencia</option>
               <option value="Junior">Junior</option>
               <option value="Semisenior">Semisenior</option>

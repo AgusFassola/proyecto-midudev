@@ -26,12 +26,20 @@ function App() {
     setCurrentPage(page);
   }
 
+  const handleSearch = () =>{
+
+  }
+
+  const handleTextFilter=()=>{
+
+  }
+
   return (
     <>
       <Header />
       <main>
         <Title/>
-        <SearchFormSection/>
+        <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter}/>
         <JobList jobsData={pagedResults}/>
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
         

@@ -17,6 +17,8 @@ body{
 .caja-buscador{
     display: flex;
     justify-content: center;
+    position: relative;
+    padding : .25rem .5rem;
 }
 
 .resultados{

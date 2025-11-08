@@ -1,6 +1,11 @@
 export function SearchFormSection(){
+const handleSubmit=(event)=>{
+  event.preventDefault();
+  console.log('Formulario enviado');
+}
+
   return(
-    <form id="empleos-form" role="search">
+    <form onSubmit={handleSubmit} id="empleos-form" role="search">
           <section className="caja-buscador">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -10,6 +15,7 @@ export function SearchFormSection(){
               <path d="M21 21l-6 -6" />
             </svg>
             <input id="buscador" type="search" placeholder="Buscar empleos" />
+            <button type="submit" style={{  right:0 }}>Buscar</button>
           </section>
           <section className="selects">
             <select name="technology" id="filter-technology">

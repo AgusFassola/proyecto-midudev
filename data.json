@@ -19,7 +19,7 @@
     "descripcion": "Estamos buscando un analista de datos con experiencia en el manejo de grandes conjuntos de datos y herramientas de visualización. Se requiere conocimiento en SQL, Python y R.",
     "data": {
       "technology": "python",
-      "modalidad": "Presencal",
+      "modalidad": "Presencial",
       "nivel": "junior"
     }
   },
@@ -31,8 +31,8 @@
     "descripcion": "Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.",
     "data": {
       "technology": "mobile",
-      "modalidad": "Híbrido",
-      "nivel": "mid-level"
+      "modalidad": "Hibrido",
+      "nivel": "semisenior"
     }
   },
   {
@@ -44,7 +44,7 @@
     "data": {
       "technology": "mobile",
       "modalidad": "Remoto",
-      "nivel": "mid-level"
+      "nivel": "semisenior"
     }
   },
   {
@@ -56,7 +56,7 @@
     "data": {
       "technology": "mobile",
       "modalidad": "Presencial",
-      "nivel": "mid-level"
+      "nivel": "semisenior"
     }
   },
   {
@@ -67,8 +67,8 @@
     "descripcion": "Se busca un administrador de bases de datos con experiencia en PostgreSQL y MySQL. El candidato deberá asegurar la disponibilidad, seguridad y rendimiento de las bases de datos de producción.",
     "data": {
       "technology": "mobile",
-      "modalidad": "Híbrido",
-      "nivel": "mid-level"
+      "modalidad": "Hibrido",
+      "nivel": "semisenior"
     }
   },
   {
@@ -80,7 +80,7 @@
     "data": {
       "technology": "mobile",
       "modalidad": "Remoto",
-      "nivel": "mid-level"
+      "nivel": "semisenior"
     }
   },
   {
@@ -104,7 +104,7 @@
     "data": {
       "technology": "react",
       "modalidad": "Remoto",
-      "nivel": "mid-level"
+      "nivel": "semisenior"
     }
   },
   {
@@ -116,7 +116,7 @@
     "data": {
       "technology": "node",
       "modalidad": "bogota",
-      "nivel": "mid"
+      "nivel": "semisenior"
     }
   },
   {
@@ -140,7 +140,7 @@
     "data": {
       "technology": "mobile",
       "modalidad": "Presencial",
-      "nivel": "mid-level"
+      "nivel": "semisenior"
     }
   },
   {
@@ -151,8 +151,8 @@
     "descripcion": "Buscamos un administrador de sistemas con experiencia en Linux, Docker y monitoreo de servidores. Conocimiento en scripting Bash o Python será un plus.",
     "data": {
       "technology": "mobile",
-      "modalidad": "Híbrido",
-      "nivel": "mid-level"
+      "modalidad": "Hibrido",
+      "nivel": "semisenior"
     }
   },
   {
@@ -164,7 +164,7 @@
     "data": {
       "technology": "mobile",
       "modalidad": "Presencial",
-      "nivel": "mid-level"
+      "nivel": "semisenior"
     }
   },
   {
@@ -175,7 +175,7 @@
     "descripcion": "Buscamos un técnico de soporte con habilidades en resolución de incidencias, redes y sistemas operativos. Se requiere atención al detalle y excelente trato con el usuario.",
     "data": {
       "technology": "mobile",
-      "modalidad": "Híbrido",
+      "modalidad": "Hibrido",
       "nivel": "junior"
     }
   }

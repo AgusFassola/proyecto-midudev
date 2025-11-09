@@ -14,6 +14,7 @@ const RESULTS_PER_PAGE=5;
 
 function App() {
   const [filters, setFilters] = useState({
+    text : '',
     technology: '',
     location: '',
     experienceLevel: '',
@@ -24,7 +25,11 @@ function App() {
 
   const jobsFilteredByFilters = jobsData.filter((job) => {
     return(
-      (filters.technology === '' || job.data.technology.toLowerCase() === filters.technology.toLowerCase()) 
+      (filters.text === '' || job.titulo.toLowerCase().includes(filters.text.toLowerCase())) &&
+      (filters.technology === '' || job.data.technology.toLowerCase() === filters.technology.toLowerCase()) && 
+      (filters.location === '' || job.data.modalidad.toLowerCase() === filters.location.toLowerCase()) &&
+      (filters.experienceLevel === '' || job.data.nivel.toLowerCase() === filters.experienceLevel.toLowerCase())
+
     )
   })
 
@@ -51,17 +56,17 @@ function App() {
     setCurrentPage(1);
   }
 
-  const handleTextFilter=(newTextToFilter)=>{
+/*   const handleTextFilter=(newTextToFilter)=>{
     setTextToFilter(newTextToFilter);
     setCurrentPage(1)
-  }
+  } */
 
   return (
     <>
       <Header />
       <main>
         <Title/>
-        <SearchFormSection onSearch={handleSearch} onTextFilter={handleTextFilter}/>
+        <SearchFormSection onSearch={handleSearch} />
         <JobList jobsData={pagedResults}/>
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
         

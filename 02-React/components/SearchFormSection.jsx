@@ -1,30 +1,37 @@
 import { useId } from "react";
 
-export function SearchFormSection({ onSearch, onTextFilter }){
+export function SearchFormSection({ onSearch }){
 
 const idText=useId();
 const idTechnology=useId();
 const idLocation=useId();
 const idExperienceLevel=useId();
 
+/* const handleTextChange =(event) =>{
+   const text = event.target.value;
+    onTextFilter(text);
+ }
+ */
 const handleSubmit=(event)=>{
   event.preventDefault();
 
   const formData = new FormData(event.target);
 
   const filters={
+    text: formData.get(idText),
     technology: formData.get(idTechnology),
     location: formData.get(idLocation),
     experienceLevel: formData.get(idExperienceLevel),
   };
  console.log(filters);
+
+/*  console.log("target",ev);
+ handleTextChange()
+ */
   onSearch(filters);
 }
 
- const handleTextChange =(event) =>{
-  const text = event.target.value;
-  onTextFilter(text);
- }
+ 
 
   return(
     <form onSubmit={handleSubmit} id="empleos-form" role="search">
@@ -37,7 +44,7 @@ const handleSubmit=(event)=>{
               <path d="M21 21l-6 -6" />
             </svg>
             <input name={idText} id="buscador" type="search" placeholder="Buscar empleos" 
-            onChange={handleTextChange} />
+             />
             <button type="submit" >Buscar</button>
           </section>
           <section className="selects">
@@ -59,7 +66,7 @@ const handleSubmit=(event)=>{
               <option value="">Ubicación</option>
               <option value="Remoto">Remoto</option>
               <option value="Presencial">Presencial</option>
-              <option value="Híbrido">Híbrido</option>
+              <option value="Hibrido">Híbrido</option>
             </select>
             <select name={idExperienceLevel} id="filter-experience-level">
               <option value="">Nivel de experiencia</option>

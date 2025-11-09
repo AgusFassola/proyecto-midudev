@@ -13,11 +13,19 @@ import jobsData from "../../data.json"
 const RESULTS_PER_PAGE=5;
 
 function App() {
-
+  const [textToFilter, setTextToFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages=Math.ceil(jobsData.length / RESULTS_PER_PAGE);
 
-  const pagedResults = jobsData.slice(
+  const jobsWithTextFilter = textToFilter === ''
+    ? jobsData
+    : jobsData.filter(job =>{
+       return job.titulo.toLowerCase().includes(textToFilter.toLowerCase());
+    }) 
+
+      const totalPages=Math.ceil(jobsWithTextFilter.length / RESULTS_PER_PAGE);
+
+
+    const pagedResults = jobsWithTextFilter.slice(
     (currentPage -1) * RESULTS_PER_PAGE,
     currentPage * RESULTS_PER_PAGE
   );
@@ -30,8 +38,9 @@ function App() {
 
   }
 
-  const handleTextFilter=()=>{
-
+  const handleTextFilter=(newTextToFilter)=>{
+    setTextToFilter(newTextToFilter);
+    setCurrentPage(1)
   }
 
   return (

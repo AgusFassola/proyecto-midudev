@@ -13,12 +13,24 @@ import jobsData from "../../data.json"
 const RESULTS_PER_PAGE=5;
 
 function App() {
+  const [filters, setFilters] = useState({
+    technology: '',
+    location: '',
+    experienceLevel: '',
+  });
   const [textToFilter, setTextToFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
+
+  const jobsFilteredByFilters = jobsData.filter((job) => {
+    return(
+      (filters.technology === '' || job.data.technology.toLowerCase() === filters.technology.toLowerCase()) 
+    )
+  })
+
   const jobsWithTextFilter = textToFilter === ''
-    ? jobsData
-    : jobsData.filter(job =>{
+    ? jobsFilteredByFilters
+    : jobsFilteredByFilters.filter(job =>{
        return job.titulo.toLowerCase().includes(textToFilter.toLowerCase());
     }) 
 
@@ -34,8 +46,9 @@ function App() {
     setCurrentPage(page);
   }
 
-  const handleSearch = () =>{
-
+  const handleSearch = (filters) =>{
+    setFilters(filters);
+    setCurrentPage(1);
   }
 
   const handleTextFilter=(newTextToFilter)=>{

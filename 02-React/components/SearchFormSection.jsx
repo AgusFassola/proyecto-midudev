@@ -13,7 +13,6 @@ const handleSubmit=(event)=>{
   const formData = new FormData(event.target);
 
   const filters={
-    search: formData.get(idText),
     technology: formData.get(idTechnology),
     location: formData.get(idLocation),
     experienceLevel: formData.get(idExperienceLevel),
@@ -52,8 +51,8 @@ const handleSubmit=(event)=>{
               <hr />
               <optgroup label="Backend">
                 <option value="Python">Python</option>
-                <option value="Nodejs">Node js</option>
-                <option value="Java">Java</option>
+                <option value="Node">Node js</option>
+                <option value="Mobile">Mobile</option>
               </optgroup>
             </select>
             <select name={idLocation} id="filter-location">

@@ -1,10 +1,13 @@
+import { useRouter } from "../hooks/useRouter";
+
 export default function Link({ href, children, ...restOfProps }) {
+
+  const { navigateTo } = useRouter();
 
     const handleCLick = (event) => {
         event.preventDefault();
-        window.history.pushState({},'', href);
-        window.dispatchEvent(new PopStateEvent('popstate'));
-    }
+        navigateTo(href);
+      }
 
     return (
     <a href={href} {...restOfProps} onClick={handleCLick} >

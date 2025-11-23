@@ -1,76 +1,37 @@
-import { useState } from "react"
 
-import JobCard from "../components/JobCard"
-import { Header } from "../components/Header"
-import { Footer } from "../components/Footer"
-import { SearchFormSection } from "../components/SearchFormSection"
-import { Pagination } from "../components/Pagination"
-import { Title } from "../components/Title"
-import { JobList } from "../components/JobList"
-
-import jobsData from "../../data.json"
-
-const RESULTS_PER_PAGE=5;
+import { Header } from "../src/components/Header"
+import { Footer } from "../src/components/Footer"
+import HomePage from "./pages/HomePage"
+import SearchPage from "./pages/Search"
+import NotFoundPage from "./pages/404"
+import { useEffect, useState } from "react"
 
 function App() {
-  const [filters, setFilters] = useState({
-    text : '',
-    technology: '',
-    location: '',
-    experienceLevel: '',
-  });
-  const [textToFilter, setTextToFilter] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
-
-  const jobsFilteredByFilters = jobsData.filter((job) => {
-    return(
-      (filters.text === '' || job.titulo.toLowerCase().includes(filters.text.toLowerCase())) &&
-      (filters.technology === '' || job.data.technology.toLowerCase() === filters.technology.toLowerCase()) && 
-      (filters.location === '' || job.data.modalidad.toLowerCase() === filters.location.toLowerCase()) &&
-      (filters.experienceLevel === '' || job.data.nivel.toLowerCase() === filters.experienceLevel.toLowerCase())
-
-    )
-  })
-
-  const jobsWithTextFilter = textToFilter === ''
-    ? jobsFilteredByFilters
-    : jobsFilteredByFilters.filter(job =>{
-       return job.titulo.toLowerCase().includes(textToFilter.toLowerCase());
-    }) 
-
-      const totalPages=Math.ceil(jobsWithTextFilter.length / RESULTS_PER_PAGE);
-
-
-    const pagedResults = jobsWithTextFilter.slice(
-    (currentPage -1) * RESULTS_PER_PAGE,
-    currentPage * RESULTS_PER_PAGE
-  );
-
-  const handlePageChange=(page) =>{
-    setCurrentPage(page);
+  let pages = <NotFoundPage/>; 
+  if (currentPath === "/") {
+    pages = <HomePage />;
+  } else if (currentPath === "/search") {
+    pages = <SearchPage />;
   }
 
-  const handleSearch = (filters) =>{
-    setFilters(filters);
-    setCurrentPage(1);
-  }
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
 
-/*   const handleTextFilter=(newTextToFilter)=>{
-    setTextToFilter(newTextToFilter);
-    setCurrentPage(1)
-  } */
+    window.addEventListener("popstate", handleLocationChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+    };
+  }, []);
 
   return (
     <>
       <Header />
-      <main>
-        <Title/>
-        <SearchFormSection onSearch={handleSearch} />
-        <JobList jobsData={pagedResults}/>
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
-        
-      </main>
+        {pages}
       <Footer />
     </>
   )

@@ -15,7 +15,7 @@ const idExperienceLevel=useId();
 const handleSubmit=(event)=>{
   event.preventDefault();
 
-  const formData = new FormData(event.target);
+  const formData = new FormData(event.currentTarget);
 
   const filters={
     text: formData.get(idText),
@@ -34,7 +34,7 @@ const handleSubmit=(event)=>{
  
 
   return(
-    <form onSubmit={handleSubmit} id="empleos-form" role="search">
+    <form onChange={handleSubmit} id="empleos-form" role="search">
           <section className="caja-buscador">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -45,7 +45,6 @@ const handleSubmit=(event)=>{
             </svg>
             <input name={idText} id="buscador" type="search" placeholder="Buscar empleos" 
              />
-            <button type="submit" >Buscar</button>
           </section>
           <section className="selects">
             <select name={idTechnology} id="filter-technology">

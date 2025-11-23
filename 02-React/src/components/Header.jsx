@@ -1,3 +1,5 @@
+import Link from "./Link";
+
 export function Header() {
   return(
   <header>
@@ -11,12 +13,14 @@ export function Header() {
         <path d="M6 9l-3 3l3 3" />
         <path d="M3 12h6" />
       </svg>
+      <Link href="/">
       DevJobs
+      </Link>
     </h2>
     <nav>
-      <a href="./index.html">Inicio</a>
-      <a href="">Empleos</a>
-      <a href="./react.html">React</a>
+      <Link href="/">Inicio</Link>
+      <Link href="/search">Empleos</Link>
+      <Link href="">React</Link>
     </nav>
     <div>
       <devjobs-avatar
@@ -30,7 +34,7 @@ export function Header() {
         size="32"
       ></devjobs-avatar>
 
-      <a href="">Iniciar sesión</a>
+      <Link href="">Iniciar sesión</Link>
     </div>
   </header>
   )

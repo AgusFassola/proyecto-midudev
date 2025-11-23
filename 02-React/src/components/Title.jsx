@@ -2,7 +2,7 @@ import React from 'react'
 
 export  function Title() {
   return (
-   <section className="titulo">
+   <section className="tituloEmpleos">
              <h1>Encuentra tu próximo trabajo</h1>
              <p>hacer el segundo diseño en casa.</p>
            </section>

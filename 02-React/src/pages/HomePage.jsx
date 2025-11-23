@@ -2,10 +2,10 @@ export default function HomePage(){
     return(
         <main>
         <section className="titulo">
-            <img className="imagen-de-fondo" src="./background.webp" width="200" />
+            <img className="imagen-de-fondo" src="./background.webp" />
             <h1>Encuentra el trabajo de tus sueños</h1>
             <p>unete a la comunidad.</p>
-            <form role="search">
+            <form role="search" className="buscadorInicio">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                     className="icon icon-tabler icons-tabler-outline icon-tabler-search">

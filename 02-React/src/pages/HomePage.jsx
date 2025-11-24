@@ -1,11 +1,27 @@
+import { useRouter } from "../hooks/useRouter";
+
 export default function HomePage(){
+
+    const {navigateTo}=useRouter();
+
+    const handleSearch=(event)=>{
+        event.preventDefault();
+        const formData=new FormData (event.currentTarget);  
+        const searchTerm=formData.get("search");
+
+        const url = searchTerm
+        ? `/search?text=${encodeURIComponent(searchTerm)}`
+        : '/search';
+        navigateTo(url);
+    }
+
     return(
         <main>
         <section className="titulo">
             <img className="imagen-de-fondo" src="./background.webp" />
             <h1>Encuentra el trabajo de tus sueños</h1>
             <p>unete a la comunidad.</p>
-            <form role="search" className="buscadorInicio">
+            <form onSubmit={handleSearch} role="search" className="buscadorInicio">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                     className="icon icon-tabler icons-tabler-outline icon-tabler-search">
@@ -13,7 +29,7 @@ export default function HomePage(){
                     <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                     <path d="M21 21l-6 -6" />
                 </svg>
-                <input id="buscador" required type="text" placeholder="Buscar empleos"
+                <input name="search" id="buscador" required type="text" placeholder="Buscar empleos"
                     aria-label="Search through site content" />
                 <button className="btnBuscar" type="submit">Buscar</button>
             </form>

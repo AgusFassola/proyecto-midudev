@@ -11,9 +11,9 @@ function App() {
   return (
     <>
       <Header />
-      <Route parh="/" component={HomePage} />
-      <Route parh="/search" component={SearchPage} />
-      <Route parh="/404" component={NotFoundPage} />
+      <Route path="/" component={HomePage} />
+      <Route path="/search" component={SearchPage} />
+      <Route path="/404" component={NotFoundPage} />
       <Footer />
     </>
   )

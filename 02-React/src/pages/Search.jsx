@@ -1,99 +1,94 @@
-import { useEffect, useState } from "react"
-import { SearchFormSection } from "../../src//components/SearchFormSection"
-import { Pagination } from "../../src//components/Pagination"
-import { Title } from "../../src//components/Title"
-import { JobList } from "../../src//components/JobList"
+import { useEffect, useState } from "react";
+import { SearchFormSection } from "../../src//components/SearchFormSection";
+import { Pagination } from "../../src//components/Pagination";
+import { Title } from "../../src//components/Title";
+import { JobList } from "../../src//components/JobList";
 
-import jobsData from "../../../data.json"
+import jobsData from "../../../data.json";
 
-const RESULTS_PER_PAGE=5;
+const RESULTS_PER_PAGE = 5;
 
 const useFilters = () => {
-const [filters, setFilters] = useState({
-    text : '',
-    technology: '',
-    location: '',
-    experienceLevel: '',
+  const [filters, setFilters] = useState({
+    text: "",
+    technology: "",
+    location: "",
+    experienceLevel: "",
   });
   //const [textToFilter, setTextToFilter] = useState('');
-  const textToFilter = '';
+  const textToFilter = "";
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [jobs, setJobs] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const jobsFilteredByFilters = jobsData.filter((job) => {
-    return(
-      (filters.text === '' || job.titulo.toLowerCase().includes(filters.text.toLowerCase())) &&
-      (filters.technology === '' || job.data.technology.toLowerCase() === filters.technology.toLowerCase()) && 
-      (filters.location === '' || job.data.modalidad.toLowerCase() === filters.location.toLowerCase()) &&
-      (filters.experienceLevel === '' || job.data.nivel.toLowerCase() === filters.experienceLevel.toLowerCase())
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        setLoading(true);
+        const response = await fetch("https://jscamp-api.vercel.app/api/jobs");
+        const json = await response.json();
+        setJobs(json.data);
+        setTotal(json.total);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchJobs();
+  }, []);
 
-    )
-  })
+  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
 
-  const jobsWithTextFilter = textToFilter === ''
-    ? jobsFilteredByFilters
-    : jobsFilteredByFilters.filter(job =>{
-       return job.titulo.toLowerCase().includes(textToFilter.toLowerCase());
-    }) 
-
-      const totalPages=Math.ceil(jobsWithTextFilter.length / RESULTS_PER_PAGE);
-
-
-    const pagedResults = jobsWithTextFilter.slice(
-    (currentPage -1) * RESULTS_PER_PAGE,
-    currentPage * RESULTS_PER_PAGE
-  );
-
-  const handlePageChange=(page) =>{
+  const handlePageChange = (page) => {
     setCurrentPage(page);
-  }
+  };
 
-  const handleSearch = (filters) =>{
+  const handleSearch = (filters) => {
     setFilters(filters);
     setCurrentPage(1);
-  }
+  };
 
-/*   const handleTextFilter=(newTextToFilter)=>{
+  /*   const handleTextFilter=(newTextToFilter)=>{
     setTextToFilter(newTextToFilter);
     setCurrentPage(1)
   } */
 
-    return{
-    jobsWithTextFilter,
-    pagedResults,
+  return {
+    loading,
+    jobs,
+    total,
     totalPages,
     currentPage,
     handlePageChange,
-    handleSearch
-    }
-}
-
+    handleSearch,
+  };
+};
 
 function SearchPage() {
-
-  const{
-    jobsWithTextFilter,
-    pagedResults,
-    totalPages,
-    currentPage,
-    handlePageChange,
-    handleSearch
-  } = useFilters();
+  const { jobs,loading, total, totalPages, currentPage, handlePageChange, handleSearch } =
+    useFilters();
 
   useEffect(() => {
-    document.title = `Resultados: ${jobsWithTextFilter.length}, Página: ${currentPage} - DevJobs `
-  }, [jobsWithTextFilter, currentPage]);
-  
+    document.title = `Resultados: ${total}, Página: ${currentPage} - DevJobs `;
+  }, [total, currentPage]);
 
   return (
-      <main>
-        <Title/>
-        <SearchFormSection onSearch={handleSearch} />
-        <JobList jobsData={pagedResults}/>
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>
-        
-      </main>
-  )
+    <main>
+      <Title />
+      <SearchFormSection onSearch={handleSearch} />
+      {
+        loading ? <p>Cargando empleos...</p> : <JobList jobsData={jobs} />
+      }
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </main>
+  );
 }
 
-export default SearchPage
+export default SearchPage;

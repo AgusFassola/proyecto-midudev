@@ -3,6 +3,7 @@ import { SearchFormSection } from "../../src//components/SearchFormSection";
 import { Pagination } from "../../src//components/Pagination";
 import { Title } from "../../src//components/Title";
 import { JobList } from "../../src//components/JobList";
+import { useRouter } from "../../src/hooks/useRouter";
 
 const RESULTS_PER_PAGE = 5;
 
@@ -20,6 +21,8 @@ const useFilters = () => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const { navigateTo } = useRouter();
+
   useEffect(() => {
     async function fetchJobs() {
       try {
@@ -30,6 +33,10 @@ const useFilters = () => {
         if (filters.technology) params.append("technology", filters.technology);
         if (filters.location) params.append("type", filters.location);
         if (filters.experienceLevel) params.append("level", filters.experienceLevel);
+
+        const offset = (currentPage - 1) * RESULTS_PER_PAGE;
+        params.append("limit", RESULTS_PER_PAGE);
+        params.append("offset", offset);
 
         const queryParams = params.toString();
         
@@ -46,7 +53,23 @@ const useFilters = () => {
     fetchJobs();
   }, [filters, currentPage]);
 
-  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (filters.text) params.append("text", filters.text);
+    if (filters.technology) params.append("technology", filters.technology);
+    if (filters.location) params.append("type", filters.location);
+    if (filters.experienceLevel) params.append("level", filters.experienceLevel);
+  
+    if (currentPage > 1) params.append("page", currentPage);
+
+    const newUrl = params.toString()
+      ? `${window.location.pathname}?${params.toString()}`
+      : window.location.pathname;
+
+      navigateTo(newUrl);
+  }, [filters, currentPage, navigateTo]);
+
+  const totalPages = Math.ceil(total / RESULTS_PER_PAGE);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -77,12 +100,13 @@ function SearchPage() {
   const { jobs,loading, total, totalPages, currentPage, handlePageChange, handleSearch } =
     useFilters();
 
-  useEffect(() => {
-    document.title = `Resultados: ${total}, Página: ${currentPage} - DevJobs `;
-  }, [total, currentPage]);
+  const title = loading ? 'Cargando...'
+  : `Resultados: ${total}, Página: ${currentPage} - DevJobs `;
 
   return (
     <main>
+      <title>{title}</title>
+      <meta name="description" content="Encuentra el trabajo de tus sueños en DevJobs, la plataforma líder para desarrolladores. Explora ofertas de empleo, filtra por tecnología, ubicación y nivel de experiencia, y postúlate fácilmente. ¡Tu próximo desafío profesional te espera aquí!" />
       <Title />
       <SearchFormSection onSearch={handleSearch} />
       {

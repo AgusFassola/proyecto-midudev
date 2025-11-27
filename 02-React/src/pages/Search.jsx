@@ -4,8 +4,6 @@ import { Pagination } from "../../src//components/Pagination";
 import { Title } from "../../src//components/Title";
 import { JobList } from "../../src//components/JobList";
 
-import jobsData from "../../../data.json";
-
 const RESULTS_PER_PAGE = 5;
 
 const useFilters = () => {
@@ -16,7 +14,6 @@ const useFilters = () => {
     experienceLevel: "",
   });
   //const [textToFilter, setTextToFilter] = useState('');
-  const textToFilter = "";
   const [currentPage, setCurrentPage] = useState(1);
 
   const [jobs, setJobs] = useState([]);
@@ -27,7 +24,16 @@ const useFilters = () => {
     async function fetchJobs() {
       try {
         setLoading(true);
-        const response = await fetch("https://jscamp-api.vercel.app/api/jobs");
+
+        const params = new URLSearchParams();
+        if (filters.text) params.append("text", filters.text);
+        if (filters.technology) params.append("technology", filters.technology);
+        if (filters.location) params.append("type", filters.location);
+        if (filters.experienceLevel) params.append("level", filters.experienceLevel);
+
+        const queryParams = params.toString();
+        
+        const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`);
         const json = await response.json();
         setJobs(json.data);
         setTotal(json.total);
@@ -38,7 +44,7 @@ const useFilters = () => {
       }
     }
     fetchJobs();
-  }, []);
+  }, [filters, currentPage]);
 
   const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
 

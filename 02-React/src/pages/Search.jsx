@@ -8,14 +8,21 @@ import { useRouter } from "../../src/hooks/useRouter";
 const RESULTS_PER_PAGE = 5;
 
 const useFilters = () => {
-  const [filters, setFilters] = useState({
-    text: "",
-    technology: "",
-    location: "",
-    experienceLevel: "",
+  const [filters, setFilters] = useState(() =>{
+    const params = new URLSearchParams(window.location.search);
+    return { 
+      text : params.get("text") || "",
+      technology : params.get("technology") || "",
+      location : params.get("type") || "",
+      experienceLevel : params.get("level") || ""
+    }
   });
   //const [textToFilter, setTextToFilter] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() =>{
+    const params = new URLSearchParams(window.location.search);
+    const page = parseInt(params.get("page"));
+    return isNaN(page) || page < 1 ? 1 : page;
+  });
 
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);
@@ -69,6 +76,8 @@ const useFilters = () => {
       navigateTo(newUrl);
   }, [filters, currentPage, navigateTo]);
 
+  let text = filters.text;
+
   const totalPages = Math.ceil(total / RESULTS_PER_PAGE);
 
   const handlePageChange = (page) => {
@@ -86,6 +95,7 @@ const useFilters = () => {
   } */
 
   return {
+    text,
     loading,
     jobs,
     total,
@@ -97,7 +107,7 @@ const useFilters = () => {
 };
 
 function SearchPage() {
-  const { jobs,loading, total, totalPages, currentPage, handlePageChange, handleSearch } =
+  const { jobs, text, loading, total, totalPages, currentPage, handlePageChange, handleSearch } =
     useFilters();
 
   const title = loading ? 'Cargando...'
@@ -108,7 +118,7 @@ function SearchPage() {
       <title>{title}</title>
       <meta name="description" content="Encuentra el trabajo de tus sueños en DevJobs, la plataforma líder para desarrolladores. Explora ofertas de empleo, filtra por tecnología, ubicación y nivel de experiencia, y postúlate fácilmente. ¡Tu próximo desafío profesional te espera aquí!" />
       <Title />
-      <SearchFormSection onSearch={handleSearch} />
+      <SearchFormSection initialText={text} onSearch={handleSearch} />
       {
         loading ? <p>Cargando empleos...</p> : <JobList jobsData={jobs} />
       }

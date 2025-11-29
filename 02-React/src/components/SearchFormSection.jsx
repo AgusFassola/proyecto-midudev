@@ -37,7 +37,7 @@ const useSearchForm = ( idText, idExperienceLevel, idTechnology, idLocation, onS
   return { searchText, handleSubmit };
 };
 
-  export function SearchFormSection({ onSearch }) {
+  export function SearchFormSection({ onSearch, initialText = "" }) {
     const idText = useId();
     const idTechnology = useId();
     const idLocation = useId();
@@ -76,6 +76,7 @@ const useSearchForm = ( idText, idExperienceLevel, idTechnology, idLocation, onS
           id="buscador"
           type="search"
           placeholder="Buscar empleos"
+          defaultValue={initialText}
         />
       </section>
       <section className="selects">

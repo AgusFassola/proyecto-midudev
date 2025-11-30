@@ -27,6 +27,7 @@ const useFilters = () => {
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [text, setText] = useState(filters.text);
 
   const { navigateTo } = useRouter();
 
@@ -73,10 +74,12 @@ const useFilters = () => {
       ? `${window.location.pathname}?${params.toString()}`
       : window.location.pathname;
 
-      navigateTo(newUrl);
+  window.history.replaceState(null, "", newUrl);
   }, [filters, currentPage, navigateTo]);
 
-  let text = filters.text;
+  useEffect(() => {
+    setText(filters.text);
+  }, [filters.text]);
 
   const totalPages = Math.ceil(total / RESULTS_PER_PAGE);
 

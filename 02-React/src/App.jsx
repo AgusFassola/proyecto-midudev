@@ -1,19 +1,24 @@
 
+import { Routes, Route} from 'react-router'
+
 import { Header } from "../src/components/Header"
 import { Footer } from "../src/components/Footer"
 import HomePage from "./pages/HomePage"
 import SearchPage from "./pages/Search"
 import NotFoundPage from "./pages/404"
-import { Route } from "./components/Route"
+import { JobDetail } from './pages/Detail'
 
 function App() {
 
   return (
     <>
       <Header />
-      <Route path="/" component={HomePage} />
-      <Route path="/search" component={SearchPage} />
-      <Route path="/404" component={NotFoundPage} />
+      <Routes>
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/search" element={<SearchPage/>} />
+        <Route path="*" element={<NotFoundPage/>} />
+        <Route path="/job/:id" element={<JobDetail/>} />
+      </Routes>
       <Footer />
     </>
   )

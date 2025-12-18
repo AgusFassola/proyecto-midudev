@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { Link } from "./Link"
 
 function JobCard({job}){
             
@@ -19,7 +20,11 @@ function JobCard({job}){
                         data-nivel={job.data.nivel}
                         data-technology={job.data.technology}
                     >
-                    <h3>{job.titulo}</h3>
+                    <h3>
+                        <Link href={job.titulo}
+                            >{job.titulo}
+                        </Link>
+                    </h3>
                     <h4>{job.empresa} - {job.data.modalidad}</h4>
                     <p>Nivel de experiencia: {job.data.nivel}</p> 
                     <small>{job.descripcion}</small> 

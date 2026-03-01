@@ -3,24 +3,24 @@ import { SearchFormSection } from "../../src//components/SearchFormSection";
 import { Pagination } from "../../src//components/Pagination";
 import { Title } from "../../src//components/Title";
 import { JobList } from "../../src//components/JobList";
-import { useRouter } from "../../src/hooks/useRouter";
+//import { useRouter } from "../../src/hooks/useRouter";
+import { useSearchParams } from "react-router";
 
 const RESULTS_PER_PAGE = 5;
 
 const useFilters = () => {
+  const[searchParams, setSearchParams] = useSearchParams();
   const [filters, setFilters] = useState(() =>{
-    const params = new URLSearchParams(window.location.search);
     return { 
-      text : params.get("text") || "",
-      technology : params.get("technology") || "",
-      location : params.get("type") || "",
-      experienceLevel : params.get("level") || ""
+      text : searchParams.get("text") || "",
+      technology : searchParams.get("technology") || "",
+      location : searchParams.get("type") || "",
+      experienceLevel : searchParams.get("level") || ""
     }
   });
   //const [textToFilter, setTextToFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(() =>{
-    const params = new URLSearchParams(window.location.search);
-    const page = parseInt(params.get("page"));
+    const page = parseInt(searchParams.get("page"));
     return isNaN(page) || page < 1 ? 1 : page;
   });
 
@@ -29,7 +29,7 @@ const useFilters = () => {
   const [loading, setLoading] = useState(true);
   const [text, setText] = useState(filters.text);
 
-  const { navigateTo } = useRouter();
+  //const { navigateTo } = useRouter();
 
   useEffect(() => {
     async function fetchJobs() {
@@ -62,20 +62,18 @@ const useFilters = () => {
   }, [filters, currentPage]);
 
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (filters.text) params.append("text", filters.text);
-    if (filters.technology) params.append("technology", filters.technology);
-    if (filters.location) params.append("type", filters.location);
-    if (filters.experienceLevel) params.append("level", filters.experienceLevel);
-  
-    if (currentPage > 1) params.append("page", currentPage);
+    setSearchParams((params) => {
+      if (filters.text) params.set("text", filters.text);
+      if (filters.technology) params.set("technology", filters.technology);
+      if (filters.location) params.set("type", filters.location);
+      if (filters.experienceLevel) params.set("level", filters.experienceLevel);
+    
+      if (currentPage > 1) params.set("page", currentPage);
 
-    const newUrl = params.toString()
-      ? `${window.location.pathname}?${params.toString()}`
-      : window.location.pathname;
-
-  window.history.replaceState(null, "", newUrl);
-  }, [filters, currentPage, navigateTo]);
+      return params;  
+    })
+    
+  }, [filters, currentPage, setSearchParams]);
 
   useEffect(() => {
     setText(filters.text);

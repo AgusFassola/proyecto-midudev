@@ -20,7 +20,7 @@ function JobSection({ title, content }) {
 
 }
 
-export function JobDetail() {
+export default function JobDetail() {
   const { id } = useParams();
   const Navigate = useNavigate();
 
@@ -91,22 +91,24 @@ export function JobDetail() {
           </nav>
         </div>
       </div>
-      <header>
+      <header className={style.headerContainer}>
         <h1 className={style.header}>{job.titulo}</h1>
         <p className={style.meta}>
           {job.empresa} ° {job.ubicacion}
         </p>
       </header>
 
-      <button className={style.applyButtom}>
-        Aplicar ahora
-      </button>
 
-      <JobSection title="Descripcion del puesto" content={job.content.description} />
-      <JobSection title="Responsabilidades" content={job.content.responsabilities} />
-      <JobSection title="Requisitos" content={job.content.requirements} />
-      <JobSection title="Acerca de la empresa" content={job.content.about} />
 
+      <div className={style.contentWrapper}>
+        <button className={style.applyButton}>
+          Aplicar ahora
+        </button>
+        <JobSection title="Descripcion del puesto" content={job.content.description} />
+        <JobSection title="Responsabilidades" content={job.content.responsabilities} />
+        <JobSection title="Requisitos" content={job.content.requirements} />
+        <JobSection title="Acerca de la empresa" content={job.content.about} />
+      </div>
     </>
   );
 }

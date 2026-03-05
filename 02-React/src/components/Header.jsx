@@ -1,6 +1,6 @@
 import Link from "./Link";
 
-export function Header() {
+export function Header( { isLoggedIn, onLogin, onLogout }) {
   return(
   <header>
     <h2>
@@ -34,8 +34,14 @@ export function Header() {
         size="32"
       ></devjobs-avatar>
 
-      <Link href="">Iniciar sesión</Link>
     </div>
+
+      {isLoggedIn ? (
+        <button onClick={onLogout}>Cerrar sesión</button>
+      ) : (
+        <button onClick={onLogin}>Iniciar sesión</button>
+      )}
+
   </header>
   )
 }

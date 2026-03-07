@@ -1,5 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../context/AuthContext.jsx";
 import snarkdown from "snarkdown";
 import style from "./Detail.module.css";
 
@@ -20,13 +21,15 @@ function JobSection({ title, content }) {
 
 }
 
-export default function JobDetail({ isLoggedIn }) {
+export default function JobDetail() {
   const { id } = useParams();
   const Navigate = useNavigate();
 
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const {isLoggedIn} = useContext(AuthContext)
+
 
   useEffect(() => {
     fetch(`https://jscamp-api.vercel.app/api/jobs/${id}`)
@@ -77,7 +80,6 @@ export default function JobDetail({ isLoggedIn }) {
       </div>
     );
   }
-
   return (
     <>
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 1rem" }}>
@@ -97,8 +99,6 @@ export default function JobDetail({ isLoggedIn }) {
           {job.empresa} ° {job.ubicacion}
         </p>
       </header>
-
-
 
       <div className={style.contentWrapper}>
         <button disabled={!isLoggedIn} className={style.applyButton}>

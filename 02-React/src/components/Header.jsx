@@ -1,6 +1,5 @@
 import Link from "./Link";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext.jsx";
+import { useAuthStore } from "../store/authStore";
 
 export function Header() {
   return(
@@ -45,7 +44,7 @@ export function Header() {
 }
 
 const HeaderUserButton =()=>{
-    const {isLoggedIn, login, logout } =useContext(AuthContext)
+    const {isLoggedIn, login, logout } = useAuthStore()
       return (
           isLoggedIn ? (
             <button onClick={logout}>Cerrar sesión</button>

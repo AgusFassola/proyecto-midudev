@@ -1,8 +1,8 @@
 import { useParams, useNavigate, Link } from "react-router";
-import { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../context/AuthContext.jsx";
+import { useState, useEffect } from "react";
 import snarkdown from "snarkdown";
 import style from "./Detail.module.css";
+import { useAuthStore } from "../store/authStore";
 
 function JobSection({ title, content }) {
   const html = snarkdown(content || "")
@@ -28,7 +28,7 @@ export default function JobDetail() {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const {isLoggedIn} = useContext(AuthContext)
+  const {isLoggedIn} = useAuthStore()
 
 
   useEffect(() => {

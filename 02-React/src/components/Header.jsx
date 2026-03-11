@@ -1,7 +1,12 @@
 import Link from "./Link";
 import { useAuthStore } from "../store/authStore";
+import { useFavoritesStore } from "../store/favoritesStore";
 
 export function Header() {
+const { countFavorites } = useFavoritesStore()
+const { isLoggedIn } = useAuthStore()
+const numFavorites = countFavorites()
+
   return(
   <header>
     <h2>
@@ -22,6 +27,11 @@ export function Header() {
       <Link href="/">Inicio</Link>
       <Link href="/search">Empleos</Link>
       <Link href="">React</Link>
+      {isLoggedIn && (
+        <Link href="/profile">
+          Favoritos ( ❤️ {numFavorites})
+        </Link>
+      )}
     </nav>
     <div>
       <devjobs-avatar

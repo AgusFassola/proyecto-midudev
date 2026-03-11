@@ -1,51 +1,62 @@
-import React from 'react'
-import { useState } from 'react';
-import Link from "./Link"
-import styles from './JobCard.module.css'
+import React from "react";
+import { useState } from "react";
+import Link from "./Link";
+import styles from "./JobCard.module.css";
+import { useFavoritesStore } from "../store/favoritesStore";
 
-function JobCard({job}){
-            
-            const [isApplied, setIsApplied] = useState(false);
+function JobCardFavoriteButton({ jobId }) {
+  const { toggleFavorite, isFavorite } = useFavoritesStore();
+  return (
+    <button onClick={() => toggleFavorite(jobId)}>
+      {isFavorite(jobId) ? "❤️" : "🤍"}
+    </button>
+  );
+}
 
-            function handleClick(){
-                setIsApplied(!isApplied);
-            }
+function JobCard({ job }) {
+  const [isApplied, setIsApplied] = useState(false);
 
-            const text = isApplied ? 'Aplicado' : 'Aplicar'
-            const buttonClass = isApplied ? 'is-applied' : ''
+  function handleClick() {
+    setIsApplied(!isApplied);
+  }
 
-            return (
-                <div className="cajita">
-                    <article className="articles"
-                        data-modalidad={job.data.modalidad}
-                        data-nivel={job.data.nivel}
-                        data-technology={job.data.technology}
-                    >
-                    <h3>
-                        <Link 
-                            className={styles.title}
-                            href={`/jobs/${job.id}`}>
-                            {job.titulo}
-                        </Link>
-                    </h3>
-                    <h4>{job.empresa} - {job.data.modalidad}</h4>
-                    <p>Nivel de experiencia: {job.data.nivel}</p> 
-                    <small>{job.descripcion}</small> 
-                    </article>
-                    <div className={styles.actions}>
-                        <Link href={`/jobs/${job.id}`}
-                            className={styles.details}
-                        >
-                            Ver detalles
-                        </Link>                    
-                        <button 
-                            onClick={handleClick}
-                            className={`boton-importante ${buttonClass}`}
-                            disabled={isApplied}
-                        >{text}</button>
-                    </div>
-                </div>
-            )
-        }
+  const text = isApplied ? "Aplicado" : "Aplicar";
+  const buttonClass = isApplied ? "is-applied" : "";
+
+  return (
+    <div className="cajita">
+      <article
+        className="articles"
+        data-modalidad={job.data.modalidad}
+        data-nivel={job.data.nivel}
+        data-technology={job.data.technology}
+      >
+        <h3>
+          <Link className={styles.title} href={`/jobs/${job.id}`}>
+            {job.titulo}
+          </Link>
+        </h3>
+        <h4>
+          {job.empresa} - {job.data.modalidad}
+        </h4>
+        <p>Nivel de experiencia: {job.data.nivel}</p>
+        <small>{job.descripcion}</small>
+      </article>
+      <div className={styles.actions}>
+        <Link href={`/jobs/${job.id}`} className={styles.details}>
+          Ver detalles
+        </Link>
+        <button
+          onClick={handleClick}
+          className={`boton-importante ${buttonClass}`}
+          disabled={isApplied}
+        >
+          {text}
+        </button>
+        <JobCardFavoriteButton jobId={job.id} />
+      </div>
+    </div>
+  );
+}
 
 export default JobCard;

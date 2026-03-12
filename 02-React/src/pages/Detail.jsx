@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import snarkdown from "snarkdown";
 import style from "./Detail.module.css";
 import { useAuthStore } from "../store/authStore";
+import { useFavoritesStore } from "../store/favoritesStore";
 
 function JobSection({ title, content }) {
   const html = snarkdown(content || "")
@@ -19,6 +20,18 @@ function JobSection({ title, content }) {
     </section>
   )
 
+}
+
+function DetailFavoriteButton({ jobId }) {
+
+  const { isFavorite, toggleFavorite } = useFavoritesStore();
+  const {isLoggedIn} = useAuthStore()
+
+  return (
+    <button disabled={!isLoggedIn} onClick={() => toggleFavorite(jobId)}>
+      {isFavorite(jobId) ? "❤️" : "🤍"}
+    </button>
+  );
 }
 
 export default function JobDetail() {
@@ -104,6 +117,7 @@ export default function JobDetail() {
         <button disabled={!isLoggedIn} className={style.applyButton}>
           {isLoggedIn ? "Aplicar ahora" : "Inicia sesión para aplicar"}
         </button>
+        <DetailFavoriteButton jobId={job.id} />
         <JobSection title="Descripcion del puesto" content={job.content.description} />
         <JobSection title="Responsabilidades" content={job.content.responsabilities} />
         <JobSection title="Requisitos" content={job.content.requirements} />

@@ -55,9 +55,16 @@ const numFavorites = countFavorites()
 
 const HeaderUserButton =()=>{
     const {isLoggedIn, login, logout } = useAuthStore()
-      return (
+    const {clearFavorites} = useFavoritesStore()
+
+     function handleLogout() {
+        logout()
+        clearFavorites()
+     }  
+    
+    return (
           isLoggedIn ? (
-            <button onClick={logout}>Cerrar sesión</button>
+            <button onClick={handleLogout}>Cerrar sesión</button>
           ) : (
             <button onClick={login}>Iniciar sesión</button>
           )

@@ -1,0 +1,39 @@
+.container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:80vh;
+}
+
+.card{
+  background-color:var(--card-bg);
+  padding:2.5rem;
+  border-radius:10px;
+  width:100%;
+  max-width:420px;
+  box-shadow:0 5px 20px var(--shadow);
+}
+
+.title{
+  text-align:center;
+  margin-bottom:2rem;
+}
+
+.form{
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+input{
+  padding:10px;
+  border-radius:5px;
+  border:1px solid #555;
+  background:#242434;
+  color:white;
+}
+
+input:focus{
+  outline:none;
+  border-color:var(--primary-light);
+}
